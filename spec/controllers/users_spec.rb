@@ -3,7 +3,11 @@ require 'spec_helper'
 describe  UsersController do
   context "destroy" do
   	before(:each) do
+<<<<<<< HEAD
   	  @admin = FactoryGirl.create(:admin)
+=======
+  	  @admin = FactoryGirl.create(:user, admin: true)
+>>>>>>> e8e05bf50d96596ca50a0053b0f073662898b105
       @user = FactoryGirl.create(:user)
     end
 
