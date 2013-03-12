@@ -1,0 +1,9 @@
+-if current_user
+  %h1 All available tasks
+  - @tasks.each do |task|
+    = task.title
+    = "Created at: #{task.created_at}"
+    = link_to 'Do this task', apply_task_path(task.id)
+  .row
+    = link_to 'New Task', new_task_path
+    = link_to 'Home page', root_path

@@ -1,0 +1,22 @@
+@import "bootstrap";
+
+body{
+  padding: 40px;
+}
+
+ul.nav{
+  p{margin:0}
+  margin-bottom: 10px !important;
+  width: 90%;
+  li{
+    margin-top: 8px !important;
+    margin-right: 6px !important;
+    display: inline-block;
+  }
+}
+
+@import "bootstrap-responsive";
+
+
+
+

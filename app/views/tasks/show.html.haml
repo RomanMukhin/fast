@@ -1,0 +1,16 @@
+%p
+  Title:
+  = @task.title
+%p
+  Description:
+  = @task.description
+%p
+  Consumer:
+  = @task.consumer.name
+- unless @task.doer.nil?
+  %p
+    Doer:
+    = @task.doer.name
+= link_to 'Edit', edit_task_path(@task)
+|
+\#{link_to 'Back', tasks_path}

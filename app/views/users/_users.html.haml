@@ -1,0 +1,17 @@
+%h3 Listing users
+%table
+  %tr
+    %th Admin
+    %th Name
+    %th City
+    %th
+    %th
+    %th
+  - users.each do |user|
+    %tr
+      %td= user.admin
+      %td= user.name
+      %td= user.city
+      %td= link_to 'Show', user
+      %td= link_to 'Edit', edit_user_path(user)
+      %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }

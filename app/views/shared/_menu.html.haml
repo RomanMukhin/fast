@@ -1,0 +1,21 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %ul.nav
+        -if current_user
+          .span3
+            %li.span1
+              =link_to root_path do
+                %p.text-info
+                  =current_user.name
+            %li= link_to 'Create a task', new_task_path
+            %li= link_to 'Find a task', tasks_path 
+            
+        .span2.pull-right
+          %li= link_to 'Sign up', new_user_path 
+          -if current_user.nil? 
+            %li= link_to 'Sign in', new_user_session_path
+          -else
+            %li= link_to 'Sign out', destroy_user_session_path, method: :delete
+        
+
