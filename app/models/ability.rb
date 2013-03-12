@@ -3,7 +3,11 @@ class Ability
 
   def initialize(user)
     can :read, :all
+<<<<<<< HEAD
     if user.present?
+=======
+    if user 
+>>>>>>> e8e05bf50d96596ca50a0053b0f073662898b105
       if user.admin
         can :manage, :all
       else

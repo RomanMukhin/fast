@@ -13,10 +13,18 @@ describe User do
   it { should validate_presence_of(:name)}
   it { should validate_presence_of(:email)} 
   it { should have_many :offers}
+<<<<<<< HEAD
   it { should have_many :tasks}
 
   it "offers and things are a kind of task" do
     FactoryGirl.build(:user).offers.build.should be_a(Task)
     FactoryGirl.build(:user).tasks.build.should be_a(Task)
+=======
+  it { should have_many :things}
+
+  it "offers and things are a kind of task" do
+    FactoryGirl.build(:user).offers.build.should be_a(Task)
+    FactoryGirl.build(:user).things.build.should be_a(Task)
+>>>>>>> e8e05bf50d96596ca50a0053b0f073662898b105
   end
 end
