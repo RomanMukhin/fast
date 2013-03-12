@@ -1,0 +1,14 @@
+- if tasks.empty?
+  Nothing here yet...
+- tasks.each do |task| 
+  = task.state
+  -unless task.doer.nil?
+    = link_to task.doer.name, user_path(task.doer.id)
+    applied for
+    \#{link_to task.title, task_path(task.id)}
+  - if can? :cancel, task
+    \#{link_to 'Cancel', cancel_task_path(task.id)}
+  - if can? :apply, task
+    \#{link_to 'Apply', apply_task_path(task.id)}
+  - if can? :finish, task
+    \#{link_to 'Finish', finish_task_path(task.id)}

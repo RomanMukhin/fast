@@ -1,0 +1,14 @@
+- if current_user
+  %h3 My tasks
+  =render partial: 'shared/tasks', locals:{tasks:@user.offers}
+  %br/
+  %hr/
+  %h3 I must do
+  =render partial: 'shared/tasks', locals:{tasks:@user.things}
+  %br/
+  %hr/
+  %h3 They applied for my tasks
+  =render partial: 'shared/tasks', locals:{tasks:@user.offers.done}
+  %br/
+- if can? :manage, :all
+  =render partial: 'users', locals:{ users: @users }

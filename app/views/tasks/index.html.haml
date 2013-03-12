@@ -1,0 +1,12 @@
+-if current_user
+  %h1 All available tasks
+  - @users.each do |user| user.offers.undone.each do |task|
+  - unless task.consumer_id == current_user.id
+    = task.title
+    = "Created at: #{task.created_at}"
+    = link_to 'Do this task', apply_task_path(task.id)
+  %br/
+  - end end
+  %hr/
+  = link_to 'New Task', new_task_path
+  = link_to 'Home page', root_path
