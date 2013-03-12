@@ -10,10 +10,6 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
-<<<<<<< HEAD
-  config.include Devise::TestHelpers, :type => :acceptance
-=======
->>>>>>> e8e05bf50d96596ca50a0053b0f073662898b105
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
   config.infer_base_class_for_anonymous_controllers = false

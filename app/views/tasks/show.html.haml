@@ -1,5 +1,4 @@
 %p
-<<<<<<< HEAD
   Title:
   = @task.title
 %p
@@ -11,19 +10,6 @@
 - unless @task.doer.nil?
   %p
     Doer:
-=======
-  %b Title:
-  = @task.title
-%p
-  %b Description:
-  = @task.description
-%p
-  %b Consumer:
-  = @task.consumer.name
-- unless @task.doer.nil?
-  %p
-    %b Doer:
->>>>>>> e8e05bf50d96596ca50a0053b0f073662898b105
     = @task.doer.name
 = link_to 'Edit', edit_task_path(@task)
 |

@@ -10,11 +10,7 @@ describe  TasksController do
   context "index" do
   	before(:each){ get :index }
     it { subject.current_user.should_not be_nil}
-<<<<<<< HEAD
     it { should assign_to(:tasks) }
-=======
-    it { should assign_to(:users) }
->>>>>>> e8e05bf50d96596ca50a0053b0f073662898b105
     it { should respond_with(:success) }
     it { should render_template(:index) }
     it { should_not set_the_flash } 
