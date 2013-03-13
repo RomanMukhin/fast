@@ -1,8 +1,8 @@
 FactoryGirl.define do
-  factory :task do |f|
-  	f.title Faker::Lorem.words(1)
-  	f.description Faker::Lorem.words(3)
-    f.consumer_id Faker::Base.numerify("###")
-    f.doer_id Faker::Base.numerify("###")
+  factory :task do
+  	title {Faker::Lorem.word}
+  	description {Faker::Lorem.word}
+    consumer_id {Faker::Base.numerify("###")}
+    doer_id {Faker::Base.numerify("###")}
   end
 end

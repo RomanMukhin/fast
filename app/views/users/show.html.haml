@@ -1,12 +1,10 @@
-%p
-  %b Admin:
-  = @user.admin
+%p User info
 %p
   %b Name:
   = @user.name
 %p
   %b City:
   = @user.city
-= link_to 'Edit', edit_user_path(@user)
-|
-\#{link_to 'Back', users_path}
+%h4.new_line="#{@user.name}'s tasks"
+.my_offers=render partial: 'shared/tasks', locals:{tasks:@offers}
+=#{link_to 'Back', users_path}

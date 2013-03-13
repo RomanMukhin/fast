@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @tasks = Task.where('doer_id = ? AND consumer_id != ?',nil, current_user.id)
+    @tasks = Task.where('doer_id IS NULL AND consumer_id != ?', current_user.id)
   end
 
   def create

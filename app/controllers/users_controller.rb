@@ -25,10 +25,11 @@ class UsersController < ApplicationController
 
   def destroy 
     @user.destroy
-    redirect_to root_path 
+    redirect_to root_path, notice: 'User was successfully destroyed.' 
   end
 
   def show
+    @offers = Task.where('doer_id IS NULL AND consumer_id = ?', @user.id)
   end
   def new
   end
