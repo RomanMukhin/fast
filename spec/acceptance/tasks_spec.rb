@@ -1,91 +1,76 @@
 require 'acceptance/acceptance_helper'
 
 feature "User" do
-  background do
-    @user1, @user2, @user3 = FactoryGirl.create_list(:user, 3, password: '11111111') 
-    @task =  FactoryGirl.create(:task)
-  end
+  given(:task)        { FactoryGirl.create(:task)         }
+  given(:user)        { FactoryGirl.create(:user)         }
+  given(:applied_task){ FactoryGirl.create(:applied_task)}
+  given(:offer)       { FactoryGirl.create(:offer)        }
 
   context "can" do
     scenario "create task" do
-      sign_in @user1
+      sign_in task.consumer
       click_link 'Create a task'
-      fill_in 'Title', with: @task.title
-      fill_in 'Description', with: @task.description
+      fill_in 'Title', with: task.title
+      fill_in 'Description', with: task.description
       click_button 'Create Task'
       page.should have_content('Task was successfully created')
-      page.should have_content(@task.title)
+      page.should have_content(task.title)
     end
     
     scenario "cancel task" do
-      prepare_task(@user1, @user2, true)
-      sign_in @user1
-      page.should have_content "#{@user2.name} applied for"
+      sign_in applied_task.consumer
+      page.should have_content "#{applied_task.doer.name} applied for"
       within ".my_offers" do
         click_link 'Cancel'
       end
-      page.should_not have_content "#{@user2.name} applied for"
+      page.should_not have_content "#{applied_task.doer.name} applied for"
     end
     
     scenario "accept task" do
-      prepare_task(@user3)
-      sign_in @user1
-      visit('/tasks')
+      sign_in user
+      visit(user_path(offer.id))
+      click_link 'Find a task'
       page.should have_content('All available tasks')
       click_link 'Do this task'
       page.should have_content('Cancel')
     end
 
     scenario "destroy task" do
-      prepare_task(@user1, @user2)
-      sign_in @user1
-      page.should have_content(@task.title)
+      sign_in task.consumer
+      page.should have_content(task.title)
       within ".my_offers" do
         click_link 'Delete'
       end
-      page.should_not have_content(@task.title)
+      page.should_not have_content(task.title)
     end
 
-    scenario "show users' profiles" do
-      prepare_task(@user2)
-      sign_in @user1
-      visit user_path(@user2)
-      page.should have_content("#{@user2.name}'s tasks")
-      page.should have_content(@user2.offers.first.title)
+    scenario "see users' profiles" do
+      sign_in user
+      visit user_path(offer.consumer)
+      page.should have_content("#{offer.consumer.name}'s tasks")
+      page.should have_content(offer.title)
     end
   end
 
   context "cannot" do
     scenario "create invalid task" do
-      sign_in @user1
+      sign_in task.consumer
       click_link 'Create a task'
       fill_in 'Title', with: ''
-      fill_in 'Description', with: @task.description
+      fill_in 'Description', with: task.description
       click_button 'Create Task'
       page.should have_content("Title can't be blank") 
     end
     
     scenario "cancel alien task" do
-      prepare_task(@user3, @user2, true)
-      
-      sign_in @user1
-      visit user_path(@user3)
+      sign_in task.consumer
+      visit user_path(user)
       page.should_not have_content "Cancel"
     end
     
      scenario "finish task if it's not in progress" do
-      prepare_task(@user3, @user2)
-      sign_in @user1
+      sign_in user
       page.should_not have_content "Finish"
     end    
-  end
-
-  def prepare_task(consumer, *args)
-    if args.empty? || args == [true]
-      @task.update_attributes!(consumer_id: consumer.id, doer_id: nil)
-    else
-      @task.update_attributes!(consumer_id: consumer.id, doer_id: args[0].id)
-    end
-    @task.apply! if args.include?(true)
   end
 end

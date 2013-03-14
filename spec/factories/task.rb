@@ -1,8 +1,18 @@
 FactoryGirl.define do
   factory :task do
-  	title {Faker::Lorem.word}
-  	description {Faker::Lorem.word}
-    consumer_id {Faker::Base.numerify("###")}
-    doer_id {Faker::Base.numerify("###")}
+  	title       {   Faker::Lorem.characters(8)}
+  	description {   Faker::Lorem.characters(8)}
+    consumer    {   FactoryGirl.create(:user)}
+    doer        {   FactoryGirl.create(:user)}
   end
+
+  factory :applied_task, parent: :task do
+  	after(:create) do |task, evaluator|
+      task.apply
+    end
+  end
+  
+  factory :offer, parent: :task do
+    doer nil
+  end         
 end
