@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :task do
-  	title       {   Faker::Lorem.characters(8)}
-  	description {   Faker::Lorem.characters(8)}
+    title       {   Faker::Lorem.characters(8)}
+    description {   Faker::Lorem.characters(8)}
     consumer    {   FactoryGirl.create(:user)}
     doer        {   FactoryGirl.create(:user)}
   end
