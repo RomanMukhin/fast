@@ -14,5 +14,15 @@ FactoryGirl.define do
   
   factory :offer, parent: :task do
     doer nil
+  end
+
+  factory :valid_task, class: Task do
+    title       {   Faker::Lorem.characters(8)}
+    description {   Faker::Lorem.characters(8)}
+  end
+
+  factory :invalid_task, class: Task do
+    title           ""     
+    description {   Faker::Lorem.characters(8)}
   end         
 end
