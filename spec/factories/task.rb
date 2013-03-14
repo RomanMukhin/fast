@@ -7,7 +7,7 @@ FactoryGirl.define do
   end
 
   factory :applied_task, parent: :task do
-  	after(:create) do |task, evaluator|
+    after(:create) do |task, evaluator|
       task.apply
     end
   end
